@@ -1,0 +1,55 @@
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'neoclide/coc.nvim', {'branch':'release'}
+Plug 'prabirshrestha/vim-lsp'
+Plug 'luochen1990/rainbow'
+Plug 'preservim/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Yggdroot/indentLine'
+Plug 'majutsushi/tagbar'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'vim-syntastic/syntastic'
+Plug 'turbio/bracey.vim'
+"Plug 'mbledkowski/neuleetcode.vim'
+call plug#end()
+"config files
+source ~/.vim/config/coc.vim
+source ~/.vim/config/airline.vim
+source ~/.vim/config/rainbow.vim
+source ~/.vim/config/nerdcommenter.vim
+source ~/.vim/config/leetcode.vim
+source ~/.vim/config/nerdtree.vim
+source ~/.vim/config/tagbar.vim
+source ~/.vim/config/rust.vim
+source ~/.vim/config/syn.vim
+"the keybinds
+inoremap jk <Esc>
+nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+"base config
+set clipboard=unnamed
+set number
+set clipboard=unnamedplus
+set hlsearch
+set incsearch
+"the color config 
+set termguicolors
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
+"colorscheme gruvbox
+set background=dark
+set splitbelow
+
