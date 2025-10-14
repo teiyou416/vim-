@@ -15,6 +15,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'vim-syntastic/syntastic'
 Plug 'turbio/bracey.vim'
+Plug 'girishji/autosuggest.vim'
+"Plug 'olimorris/onedarkpro.nvim'
 "Plug 'mbledkowski/neuleetcode.vim'
 call plug#end()
 "config files
@@ -28,6 +30,7 @@ source ~/.vim/config/tagbar.vim
 source ~/.vim/config/rust.vim
 source ~/.vim/config/syn.vim
 "the keybinds
+"most important
 inoremap jk <Esc>
 nnoremap <C-h> <C-w>h
 "nnoremap <C-j> <C-w>j
@@ -48,8 +51,9 @@ set incsearch
 set termguicolors
 let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1
-colorscheme tokyonight
-"colorscheme gruvbox
-set background=dark
+"colorscheme tokyonight
+"colorscheme  onedark_vivid
+"set background=dark
 set splitbelow
+
 

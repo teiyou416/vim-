@@ -2,9 +2,11 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <silent> <expr> <Plug>(coc-snippets-expand-jump-async) coc#_insert_key('notify', 'coc-snippets-expand-jump-async', 1)
 inoremap <silent> <expr> <Plug>(coc-snippets-expand-jump) coc#_insert_key('request', 'coc-snippets-expand-jump', 1)
+inoremap <silent> <expr> <Plug>(coc-snippets-expand-async) coc#_insert_key('notify', 'coc-snippets-expand-async', 1)
 inoremap <silent> <expr> <Plug>(coc-snippets-expand) coc#_insert_key('request', 'coc-snippets-expand', 1)
-inoremap <silent> <SNR>56_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>57_AutoPairsReturn =AutoPairsReturn()
 inoremap <silent> <Plug>NERDCommenterInsert :call nerdcommenter#Comment('i', "Insert")
 inoremap <silent> <expr> <PageUp> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
 inoremap <silent> <expr> <PageDown> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
@@ -63,8 +65,8 @@ omap ac <Plug>(coc-classobj-a)
 xmap ac <Plug>(coc-classobj-a)
 omap af <Plug>(coc-funcobj-a)
 xmap af <Plug>(coc-funcobj-a)
-xmap gx <Plug>NetrwBrowseXVis
-nmap gx <Plug>NetrwBrowseX
+xnoremap gx <ScriptCmd>vim9.Open(getregion(getpos('v'), getpos('.'), { type: mode() })->join())
+nnoremap gx <ScriptCmd>vim9.Open(GetWordUnderCursor())
 nmap <silent> gi <Plug>(coc-implementation)
 nmap go :TagbarToggle
 nmap gcc <Plug>NERDCommenterToggle
@@ -220,8 +222,6 @@ vnoremap <silent> <Plug>(coc-translator-pv) :call coc#rpc#notify('doKeymap', [
 nnoremap <silent> <Plug>(coc-translator-p) :call coc#rpc#notify('doKeymap', ['coc-translator-p'])
 vnoremap <silent> <Plug>(coc-snippets-select) :call coc#rpc#notify('doKeymap', ['coc-snippets-select'])
 xnoremap <silent> <Plug>(coc-convert-snippet) :call coc#rpc#notify('doKeymap', ['coc-convert-snippet'])
-xnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
 nnoremap <Plug>NERDCommenterAltDelims :call nerdcommenter#SwitchToAlternativeDelimiters(1)
 xnoremap <silent> <Plug>NERDCommenterUncomment :call nerdcommenter#Comment("x", "Uncomment")
 nnoremap <silent> <Plug>NERDCommenterUncomment :call nerdcommenter#Comment("n", "Uncomment")
@@ -354,17 +354,20 @@ inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm() : "\"
 inoremap jk 
 let &cpo=s:cpo_save
 unlet s:cpo_save
-set background=dark
-set clipboard=unnamedplus
 set fileencodings=ucs-bom,utf-8,default,latin1
+set helplang=ja
 set hlsearch
 set incsearch
 set laststatus=2
-set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,/usr/local/share/vim/vimfiles,/usr/local/share/vim/vim91,/usr/local/share/vim/vimfiles/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
+set nomodeline
+set ruler
+set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/pack/dist-bundle/start/vimtex,/usr/share/vim/vim91,/usr/share/vim/vim91/pack/dist/opt/netrw,/usr/share/vim/vimfiles/pack/dist-bundle/start/vimtex/after,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
 set showtabline=2
 set splitbelow
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set tabline=%!airline#extensions#tabline#get()
 set termguicolors
+set wildoptions=pum
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -378,14 +381,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 ~/.vimrc
-badd +1 vimconfig
+badd +0 vimconfig
 argglobal
 %argdel
-$argadd ~/.vimrc
+$argadd vimconfig
 edit vimconfig
 argglobal
-balt ~/.vimrc
 let s:cpo_save=&cpo
 set cpo&vim
 inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
@@ -466,11 +467,13 @@ setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
+setlocal eventignorewin=
 setlocal noexpandtab
 if &filetype != ''
 setlocal filetype=
 endif
 setlocal fillchars=
+setlocal findfunc=
 setlocal fixendofline
 setlocal foldcolumn=0
 setlocal foldenable
@@ -505,7 +508,7 @@ setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal modeline
+setlocal nomodeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
@@ -565,11 +568,11 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 13) / 27)
+let s:l = 31 - ((20 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 31
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
