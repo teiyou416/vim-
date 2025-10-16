@@ -2,19 +2,25 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <silent> <expr> <Plug>(coc-snippets-expand-jump-async) coc#_insert_key('notify', 'coc-snippets-expand-jump-async', 1)
 inoremap <silent> <expr> <Plug>(coc-snippets-expand-jump) coc#_insert_key('request', 'coc-snippets-expand-jump', 1)
-inoremap <silent> <expr> <Plug>(coc-snippets-expand-async) coc#_insert_key('notify', 'coc-snippets-expand-async', 1)
 inoremap <silent> <expr> <Plug>(coc-snippets-expand) coc#_insert_key('request', 'coc-snippets-expand', 1)
-inoremap <silent> <SNR>57_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <Plug>(fzf-maps-i) :call fzf#vim#maps('i', 0)
+inoremap <expr> <Plug>(fzf-complete-buffer-line) fzf#vim#complete#buffer_line()
+inoremap <expr> <Plug>(fzf-complete-line) fzf#vim#complete#line()
+inoremap <expr> <Plug>(fzf-complete-file-ag) fzf#vim#complete#path('ag -l -g ""')
+inoremap <expr> <Plug>(fzf-complete-file) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -type f -print -o -type l -print | sed 's:^..::'")
+inoremap <expr> <Plug>(fzf-complete-path) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -print | sed '1d;s:^..::'")
+inoremap <expr> <Plug>(fzf-complete-word) fzf#vim#complete#word()
+inoremap <silent> <Plug>(ale_complete) :ALEComplete
+inoremap <silent> <SNR>61_AutoPairsReturn =AutoPairsReturn()
 inoremap <silent> <Plug>NERDCommenterInsert :call nerdcommenter#Comment('i', "Insert")
 inoremap <silent> <expr> <PageUp> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
 inoremap <silent> <expr> <PageDown> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
-inoremap <silent> <expr> <C-Y> coc#pum#visible() ? coc#pum#confirm() : "\"
-inoremap <silent> <expr> <Up> coc#pum#visible() ? coc#pum#prev(0) : "\<Up>"
-inoremap <silent> <expr> <Down> coc#pum#visible() ? coc#pum#next(0) : "\<Down>"
-inoremap <silent> <expr> <C-P> coc#pum#visible() ? coc#pum#prev(1) : "\"
-inoremap <silent> <expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : "\"
+inoremap <silent> <expr> <C-Y> coc#pum#visible() ? coc#pum#confirm() : coc#inline#visible() ? coc#inline#accept() :"\"
+inoremap <silent> <expr> <Up> coc#pum#visible() ? coc#pum#prev(0) : coc#inline#visible() ? coc#inline#prev() :"\<Up>"
+inoremap <silent> <expr> <Down> coc#pum#visible() ? coc#pum#next(0) : coc#inline#visible() ? coc#inline#next() :"\<Down>"
+inoremap <silent> <expr> <C-P> coc#pum#visible() ? coc#pum#prev(1) : coc#inline#visible() ? coc#inline#prev() : "\"
+inoremap <silent> <expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : coc#inline#visible() ? coc#inline#next() : "\"
 imap <C-E> <Plug>(coc-snippets-expand-jump)
 imap <C-L> <Plug>(coc-snippets-expand)
 inoremap <silent> <expr> <C-O> coc#refresh()
@@ -22,36 +28,38 @@ inoremap <silent> <expr> <C-Space> coc#refresh()
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\"
 nnoremap  :CocCommand
 vmap  <Plug>(coc-snippets-select)
-nnoremap  :NERDTreeFind
 nnoremap  h
-nnoremap <NL> :bp 
-nnoremap  :bn
+nnoremap <NL> j
+nnoremap  k
 nnoremap  l
 nnoremap <silent>  :NERDTreeToggle
 nnoremap  :bd
+nmap  ca <Plug>NERDCommenterAltDelims
+xmap  cu <Plug>NERDCommenterUncomment
+nmap  cu <Plug>NERDCommenterUncomment
+xmap  cb <Plug>NERDCommenterAlignBoth
+nmap  cb <Plug>NERDCommenterAlignBoth
+xmap  cl <Plug>NERDCommenterAlignLeft
+nmap  cl <Plug>NERDCommenterAlignLeft
+nmap  cA <Plug>NERDCommenterAppend
+xmap  cy <Plug>NERDCommenterYank
+nmap  cy <Plug>NERDCommenterYank
+xmap  cs <Plug>NERDCommenterSexy
+nmap  cs <Plug>NERDCommenterSexy
+xmap  ci <Plug>NERDCommenterInvert
+nmap  ci <Plug>NERDCommenterInvert
+nmap  c$ <Plug>NERDCommenterToEOL
+xmap  cn <Plug>NERDCommenterNested
+nmap  cn <Plug>NERDCommenterNested
+xmap  cm <Plug>NERDCommenterMinimal
+nmap  cm <Plug>NERDCommenterMinimal
+xmap  c  <Plug>NERDCommenterToggle
+xmap  cc <Plug>NERDCommenterComment
+nmap  cc <Plug>NERDCommenterComment
+nnoremap <silent>  fr :History
+nnoremap <silent>  fg :Rg
+nnoremap <silent>  ff :Files
 nnoremap <silent>  y :CocList -A --normal yank
-nmap \ca <Plug>NERDCommenterAltDelims
-xmap \cu <Plug>NERDCommenterUncomment
-nmap \cu <Plug>NERDCommenterUncomment
-xmap \cb <Plug>NERDCommenterAlignBoth
-nmap \cb <Plug>NERDCommenterAlignBoth
-xmap \cl <Plug>NERDCommenterAlignLeft
-nmap \cl <Plug>NERDCommenterAlignLeft
-nmap \cA <Plug>NERDCommenterAppend
-xmap \cy <Plug>NERDCommenterYank
-nmap \cy <Plug>NERDCommenterYank
-xmap \cs <Plug>NERDCommenterSexy
-nmap \cs <Plug>NERDCommenterSexy
-xmap \ci <Plug>NERDCommenterInvert
-nmap \ci <Plug>NERDCommenterInvert
-nmap \c$ <Plug>NERDCommenterToEOL
-xmap \cn <Plug>NERDCommenterNested
-nmap \cn <Plug>NERDCommenterNested
-xmap \cm <Plug>NERDCommenterMinimal
-nmap \cm <Plug>NERDCommenterMinimal
-xmap \c  <Plug>NERDCommenterToggle
-xmap \cc <Plug>NERDCommenterComment
-nmap \cc <Plug>NERDCommenterComment
 nnoremap \n :NERDTreeFocus
 noremap <silent> \ts :CocList tasks
 nmap \aw <Plug>(coc-codeaction-selected)w
@@ -65,8 +73,8 @@ omap ac <Plug>(coc-classobj-a)
 xmap ac <Plug>(coc-classobj-a)
 omap af <Plug>(coc-funcobj-a)
 xmap af <Plug>(coc-funcobj-a)
-xnoremap gx <ScriptCmd>vim9.Open(getregion(getpos('v'), getpos('.'), { type: mode() })->join())
-nnoremap gx <ScriptCmd>vim9.Open(GetWordUnderCursor())
+xmap gx <Plug>NetrwBrowseXVis
+nmap gx <Plug>NetrwBrowseX
 nmap <silent> gi <Plug>(coc-implementation)
 nmap go :TagbarToggle
 nmap gcc <Plug>NERDCommenterToggle
@@ -222,6 +230,65 @@ vnoremap <silent> <Plug>(coc-translator-pv) :call coc#rpc#notify('doKeymap', [
 nnoremap <silent> <Plug>(coc-translator-p) :call coc#rpc#notify('doKeymap', ['coc-translator-p'])
 vnoremap <silent> <Plug>(coc-snippets-select) :call coc#rpc#notify('doKeymap', ['coc-snippets-select'])
 xnoremap <silent> <Plug>(coc-convert-snippet) :call coc#rpc#notify('doKeymap', ['coc-convert-snippet'])
+xnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
+onoremap <silent> <Plug>(fzf-maps-o) :call fzf#vim#maps('o', 0)
+xnoremap <silent> <Plug>(fzf-maps-x) :call fzf#vim#maps('x', 0)
+nnoremap <silent> <Plug>(fzf-maps-n) :call fzf#vim#maps('n', 0)
+tnoremap <silent> <Plug>(fzf-normal) 
+tnoremap <silent> <Plug>(fzf-insert) i
+nnoremap <silent> <Plug>(fzf-normal) <Nop>
+nnoremap <silent> <Plug>(fzf-insert) i
+nnoremap <silent> <Plug>(ale_info_preview) :ALEInfo -preview
+nnoremap <silent> <Plug>(ale_info_clipboard) :ALEInfo -clipboard
+nnoremap <silent> <Plug>(ale_info_echo) :ALEInfo -echo
+nnoremap <silent> <Plug>(ale_info) :ALEInfo
+nnoremap <silent> <Plug>(ale_repeat_selection) :ALERepeatSelection
+nnoremap <silent> <Plug>(ale_code_action) :ALECodeAction
+nnoremap <silent> <Plug>(ale_filerename) :ALEFileRename
+nnoremap <silent> <Plug>(ale_rename) :ALERename
+nnoremap <silent> <Plug>(ale_import) :ALEImport
+nnoremap <silent> <Plug>(ale_documentation) :ALEDocumentation
+nnoremap <silent> <Plug>(ale_hover) :ALEHover
+nnoremap <silent> <Plug>(ale_find_references) :ALEFindReferences
+nnoremap <silent> <Plug>(ale_go_to_implementation_in_vsplit) :ALEGoToImplementation -vsplit
+nnoremap <silent> <Plug>(ale_go_to_implementation_in_split) :ALEGoToImplementation -split
+nnoremap <silent> <Plug>(ale_go_to_implementation_in_tab) :ALEGoToImplementation -tab
+nnoremap <silent> <Plug>(ale_go_to_implementation) :ALEGoToImplementation
+nnoremap <silent> <Plug>(ale_go_to_type_definition_in_vsplit) :ALEGoToTypeDefinition -vsplit
+nnoremap <silent> <Plug>(ale_go_to_type_definition_in_split) :ALEGoToTypeDefinition -split
+nnoremap <silent> <Plug>(ale_go_to_type_definition_in_tab) :ALEGoToTypeDefinition -tab
+nnoremap <silent> <Plug>(ale_go_to_type_definition) :ALEGoToTypeDefinition
+nnoremap <silent> <Plug>(ale_go_to_definition_in_vsplit) :ALEGoToDefinition -vsplit
+nnoremap <silent> <Plug>(ale_go_to_definition_in_split) :ALEGoToDefinition -split
+nnoremap <silent> <Plug>(ale_go_to_definition_in_tab) :ALEGoToDefinition -tab
+nnoremap <silent> <Plug>(ale_go_to_definition) :ALEGoToDefinition
+nnoremap <silent> <Plug>(ale_fix) :ALEFix
+nnoremap <silent> <Plug>(ale_detail) :ALEDetail
+nnoremap <silent> <Plug>(ale_lint) :ALELint
+nnoremap <silent> <Plug>(ale_reset_buffer) :ALEResetBuffer
+nnoremap <silent> <Plug>(ale_disable_buffer) :ALEDisableBuffer
+nnoremap <silent> <Plug>(ale_enable_buffer) :ALEEnableBuffer
+nnoremap <silent> <Plug>(ale_toggle_buffer) :ALEToggleBuffer
+nnoremap <silent> <Plug>(ale_reset) :ALEReset
+nnoremap <silent> <Plug>(ale_disable) :ALEDisable
+nnoremap <silent> <Plug>(ale_enable) :ALEEnable
+nnoremap <silent> <Plug>(ale_toggle) :ALEToggle
+nnoremap <silent> <Plug>(ale_last) :ALELast
+nnoremap <silent> <Plug>(ale_first) :ALEFirst
+nnoremap <silent> <Plug>(ale_next_wrap_warning) :ALENext -wrap -warning
+nnoremap <silent> <Plug>(ale_next_warning) :ALENext -warning
+nnoremap <silent> <Plug>(ale_next_wrap_error) :ALENext -wrap -error
+nnoremap <silent> <Plug>(ale_next_error) :ALENext -error
+nnoremap <silent> <Plug>(ale_next_wrap) :ALENextWrap
+nnoremap <silent> <Plug>(ale_next) :ALENext
+nnoremap <silent> <Plug>(ale_previous_wrap_warning) :ALEPrevious -wrap -warning
+nnoremap <silent> <Plug>(ale_previous_warning) :ALEPrevious -warning
+nnoremap <silent> <Plug>(ale_previous_wrap_error) :ALEPrevious -wrap -error
+nnoremap <silent> <Plug>(ale_previous_error) :ALEPrevious -error
+nnoremap <silent> <Plug>(ale_previous_wrap) :ALEPreviousWrap
+nnoremap <silent> <Plug>(ale_previous) :ALEPrevious
+nnoremap <silent> <Plug>(startify-open-buffers) :call startify#open_buffers()
 nnoremap <Plug>NERDCommenterAltDelims :call nerdcommenter#SwitchToAlternativeDelimiters(1)
 xnoremap <silent> <Plug>NERDCommenterUncomment :call nerdcommenter#Comment("x", "Uncomment")
 nnoremap <silent> <Plug>NERDCommenterUncomment :call nerdcommenter#Comment("n", "Uncomment")
@@ -336,43 +403,45 @@ vnoremap <silent> <Plug>(coc-range-select-backward) :call       CocActionAsync
 vnoremap <silent> <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',     visualmode(), v:true)
 nnoremap <C-L> l
 nnoremap <C-H> h
-nnoremap <C-F> :NERDTreeFind
 nnoremap <silent> <C-N> :NERDTreeToggle
 nnoremap <C-Q> :bd
-nnoremap <C-K> :bn
-nnoremap <C-J> :bp 
+nnoremap <C-K> k
+nnoremap <C-J> j
 vmap <C-E> <Plug>(coc-snippets-select)
 nnoremap <C-C> :CocCommand
 imap  <Plug>(coc-snippets-expand-jump)
 inoremap <silent> <expr> 	 coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\	" : coc#refresh()
 imap  <Plug>(coc-snippets-expand)
 inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm(): "\u\\=coc#on_enter()\"
-inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#next(1) : "\"
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#next(1) : coc#inline#visible() ? coc#inline#next() : "\"
 inoremap <silent> <expr>  coc#refresh()
-inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#prev(1) : "\"
-inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm() : "\"
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#prev(1) : coc#inline#visible() ? coc#inline#prev() : "\"
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm() : coc#inline#visible() ? coc#inline#accept() :"\"
 inoremap jk 
 let &cpo=s:cpo_save
 unlet s:cpo_save
+set backspace=indent,eol,start
 set fileencodings=ucs-bom,utf-8,default,latin1
-set helplang=ja
+set helplang=en
 set hlsearch
 set incsearch
 set laststatus=2
 set nomodeline
+set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/pack/dist-bundle/start/vimtex,/usr/share/vim/vim91,/usr/share/vim/vim91/pack/dist/opt/netrw,/usr/share/vim/vimfiles/pack/dist-bundle/start/vimtex/after,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
+set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,~/.vim/plugged/vim-startify,~/.vim/plugged/ale,~/.vim/plugged/vim-solarized8,~/.vim/plugged/fzf,~/.vim/plugged/fzf.vim,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim91,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
+set shortmess=filnxtToOSI
 set showtabline=2
 set splitbelow
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set tabline=%!airline#extensions#tabline#get()
-set termguicolors
+set wildmenu
 set wildoptions=pum
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.vim
+cd ~/Documents/blog
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -381,11 +450,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 vimconfig
+badd +0 _data/profile.yml
 argglobal
 %argdel
-$argadd vimconfig
-edit vimconfig
+edit _data/profile.yml
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -449,11 +517,10 @@ setlocal cinoptions=
 setlocal cinscopedecls=public,protected,private
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*\ %s\ */
+setlocal comments=:#
+setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal completefunc=
-setlocal completeopt=
 setlocal concealcursor=inc
 setlocal conceallevel=2
 setlocal nocopyindent
@@ -467,13 +534,11 @@ setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
-setlocal eventignorewin=
-setlocal noexpandtab
-if &filetype != ''
-setlocal filetype=
+setlocal expandtab
+if &filetype != 'yaml'
+setlocal filetype=yaml
 endif
 setlocal fillchars=
-setlocal findfunc=
 setlocal fixendofline
 setlocal foldcolumn=0
 setlocal foldenable
@@ -487,15 +552,15 @@ setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal indentexpr=GetYAMLIndent(v:lnum)
+setlocal indentkeys=!^F,o,O,0#,0},0],<:>,0-
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -525,14 +590,14 @@ setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal scrolloff=-1
-setlocal shiftwidth=8
+setlocal shiftwidth=2
 setlocal noshortname
 setlocal showbreak=
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal nosmoothscroll
-setlocal softtabstop=0
+setlocal softtabstop=2
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
@@ -542,8 +607,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
+if &syntax != 'yaml'
+setlocal syntax=yaml
 endif
 setlocal tabstop=8
 setlocal tagcase=
@@ -561,26 +626,26 @@ setlocal varsofttabstop=
 setlocal vartabstop=
 setlocal virtualedit=
 setlocal wincolor=
-setlocal nowinfixbuf
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 31 - ((20 * winheight(0) + 10) / 21)
+let s:l = 62 - ((35 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 31
-normal! 0
+keepjumps 62
+normal! 03|
+lcd ~/Documents/blog/_data
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
-set shortmess=filnxtToOS
+set shortmess=filnxtToOSI
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

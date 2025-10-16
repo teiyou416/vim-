@@ -18,6 +18,11 @@ Plug 'turbio/bracey.vim'
 Plug 'girishji/autosuggest.vim'
 "Plug 'olimorris/onedarkpro.nvim'
 "Plug 'mbledkowski/neuleetcode.vim'
+Plug 'mhinz/vim-startify'
+Plug 'dense-analysis/ale'
+Plug 'lifepillar/vim-solarized8'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 "config files
 source ~/.vim/config/coc.vim
@@ -33,8 +38,8 @@ source ~/.vim/config/syn.vim
 "most important
 inoremap jk <Esc>
 nnoremap <C-h> <C-w>h
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -48,12 +53,18 @@ set clipboard=unnamedplus
 set hlsearch
 set incsearch
 "the color config 
-set termguicolors
-let g:tokyonight_style = 'storm' " available: night, storm
-let g:tokyonight_enable_italic = 1
+"set termguicolors
+"let g:tokyonight_style = 'storm' " available: night, storm
+"let g:tokyonight_enable_italic = 1
 "colorscheme tokyonight
+"colorscheme gruvbox
+"colorscheme solarized8_high
+colorscheme blue
 "colorscheme  onedark_vivid
-"set background=dark
+set background=light
 set splitbelow
 
-
+let mapleader = ' '
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fg :Rg<CR>
+nnoremap <silent> <leader>fr :History<CR>
