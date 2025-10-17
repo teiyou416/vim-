@@ -20,9 +20,9 @@ let g:airline#extensions#tabline#buffer_idx_format = {
        \ '8': '8 ',
        \ '9': '9 '
        \}
-nnoremap <C-j> :bp<CR> 
-nnoremap <C-k> :bn<CR>
-nnoremap <C-q> :bd<CR>
+nnoremap <A-j> :bp<CR> 
+nnoremap <A-k> :bn<CR>
+nnoremap <A-q> :bd<CR>
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif

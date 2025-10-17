@@ -33,7 +33,6 @@ nnoremap <NL> j
 nnoremap  k
 nnoremap  l
 nnoremap <silent>  :NERDTreeToggle
-nnoremap  :bd
 nmap  ca <Plug>NERDCommenterAltDelims
 xmap  cu <Plug>NERDCommenterUncomment
 nmap  cu <Plug>NERDCommenterUncomment
@@ -402,11 +401,13 @@ nnoremap <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',   
 vnoremap <silent> <Plug>(coc-range-select-backward) :call       CocActionAsync('rangeSelect',     visualmode(), v:false)
 vnoremap <silent> <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',     visualmode(), v:true)
 nnoremap <C-L> l
-nnoremap <C-H> h
-nnoremap <silent> <C-N> :NERDTreeToggle
-nnoremap <C-Q> :bd
 nnoremap <C-K> k
 nnoremap <C-J> j
+nnoremap <C-H> h
+nnoremap <silent> <C-N> :NERDTreeToggle
+nnoremap <M-q> :bd
+nnoremap <M-k> :bn
+nnoremap <M-j> :bp 
 vmap <C-E> <Plug>(coc-snippets-select)
 nnoremap <C-C> :CocCommand
 imap  <Plug>(coc-snippets-expand-jump)
@@ -417,6 +418,9 @@ inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#next(1) : coc#inline#vis
 inoremap <silent> <expr>  coc#refresh()
 inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#prev(1) : coc#inline#visible() ? coc#inline#prev() : "\"
 inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm() : coc#inline#visible() ? coc#inline#accept() :"\"
+nnoremap ñ :bd
+nnoremap ë :bn
+nnoremap ê :bp 
 inoremap jk 
 let &cpo=s:cpo_save
 unlet s:cpo_save
@@ -441,7 +445,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Documents/blog
+cd ~/.vim/config
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -450,10 +454,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 _data/profile.yml
+badd +27 ~/Downloads/vim-/vimconfig
 argglobal
 %argdel
-edit _data/profile.yml
+edit ~/Downloads/vim-/vimconfig
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -517,8 +521,8 @@ setlocal cinoptions=
 setlocal cinscopedecls=public,protected,private
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=#\ %s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal completefunc=
 setlocal concealcursor=inc
@@ -534,9 +538,9 @@ setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
-setlocal expandtab
-if &filetype != 'yaml'
-setlocal filetype=yaml
+setlocal noexpandtab
+if &filetype != ''
+setlocal filetype=
 endif
 setlocal fillchars=
 setlocal fixendofline
@@ -552,15 +556,15 @@ setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatoptions=croql
+setlocal formatoptions=tcq
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=GetYAMLIndent(v:lnum)
-setlocal indentkeys=!^F,o,O,0#,0},0],<:>,0-
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -590,14 +594,14 @@ setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal scrolloff=-1
-setlocal shiftwidth=2
+setlocal shiftwidth=8
 setlocal noshortname
 setlocal showbreak=
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal nosmoothscroll
-setlocal softtabstop=2
+setlocal softtabstop=0
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
@@ -607,8 +611,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'yaml'
-setlocal syntax=yaml
+if &syntax != ''
+setlocal syntax=
 endif
 setlocal tabstop=8
 setlocal tagcase=
@@ -632,13 +636,13 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 62 - ((35 * winheight(0) + 24) / 48)
+let s:l = 24 - ((23 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 62
-normal! 03|
-lcd ~/Documents/blog/_data
+keepjumps 24
+normal! 0
+lcd ~/Downloads/vim-
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
