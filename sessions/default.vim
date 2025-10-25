@@ -12,7 +12,7 @@ inoremap <expr> <Plug>(fzf-complete-file) fzf#vim#complete#path("find . -path '*
 inoremap <expr> <Plug>(fzf-complete-path) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -print | sed '1d;s:^..::'")
 inoremap <expr> <Plug>(fzf-complete-word) fzf#vim#complete#word()
 inoremap <silent> <Plug>(ale_complete) :ALEComplete
-inoremap <silent> <SNR>64_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>63_AutoPairsReturn =AutoPairsReturn()
 inoremap <silent> <Plug>NERDCommenterInsert :call nerdcommenter#Comment('i', "Insert")
 inoremap <silent> <expr> <PageUp> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
 inoremap <silent> <expr> <PageDown> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
@@ -433,7 +433,7 @@ set laststatus=2
 set nomodeline
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,~/.vim/plugged/vim-startify,~/.vim/plugged/ale,~/.vim/plugged/vim-solarized8,~/.vim/plugged/fzf,~/.vim/plugged/fzf.vim,~/.vim/plugged/vim-one,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim91,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
+set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,~/.vim/plugged/vim-startify,~/.vim/plugged/ale,~/.vim/plugged/vim-solarized8,~/.vim/plugged/fzf,~/.vim/plugged/fzf.vim,~/.vim/plugged/github-nvim-theme,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim91,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
 set shortmess=filnxtToOSI
 set showtabline=2
 set splitbelow
@@ -649,12 +649,12 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 53 - ((35 * winheight(0) + 23) / 46)
+let s:l = 69 - ((36 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 53
-normal! 0
+keepjumps 69
+normal! 024|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
