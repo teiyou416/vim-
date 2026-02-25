@@ -23,6 +23,8 @@ Plug 'dense-analysis/ale'
 Plug 'lifepillar/vim-solarized8'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'rakr/vim-one'
+Plug 'lervag/vimtex', { 'tag': 'v2.15' }
 call plug#end()
 "config files
 source ~/.vim/config/coc.vim
@@ -34,18 +36,19 @@ source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/tagbar.vim
 source ~/.vim/config/rust.vim
 source ~/.vim/config/syn.vim
+source ~/.vim/config/vimtex.vim
 "the keybinds
 "most important
 inoremap jk <Esc>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-Left> <C-w>h
+nnoremap <C-Down> <C-w>j
+nnoremap <C-Up> <C-w>k
+nnoremap <C-Right> <C-w>l
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 "base config
 set clipboard=unnamed
 set number
@@ -57,14 +60,19 @@ set incsearch
 "let g:tokyonight_style = 'storm' " available: night, storm
 "let g:tokyonight_enable_italic = 1
 "colorscheme tokyonight
-"colorscheme gruvbox
+colorscheme gruvbox
 "colorscheme solarized8_high
-colorscheme blue
+"colorscheme blue
 "colorscheme  onedark_vivid
-set background=light
+"colorscheme one
+set background=dark
 set splitbelow
-
+"the colorscheme for airline
+let g:airline_theme='one'
 let mapleader = ' '
+let g:ale_linters_explicit=1
+let g:coc_start_at_startup=0
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fg :Rg<CR>
 nnoremap <silent> <leader>fr :History<CR>
+nnoremap <F5> :ALEToggle<CR>
