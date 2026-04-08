@@ -6,6 +6,8 @@
     "checkOnSave.command": "clippy",
     "completion.autoimport.enable": true
   },
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "markdown.extension.conceal.enabled":false,
+  "go.goplsPath": "/home/teiyou/go/bin/gopls",
 }
 

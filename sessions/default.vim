@@ -13,7 +13,6 @@ inoremap <expr> <Plug>(fzf-complete-path) fzf#vim#complete#path("find . -path '*
 inoremap <expr> <Plug>(fzf-complete-word) fzf#vim#complete#word()
 inoremap <silent> <Plug>(ale_complete) :ALEComplete
 inoremap <silent> <SNR>66_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <Plug>NERDCommenterInsert :call nerdcommenter#Comment('i', "Insert")
 inoremap <silent> <expr> <PageUp> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
 inoremap <silent> <expr> <PageDown> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
 inoremap <silent> <expr> <C-Y> coc#pum#visible() ? coc#pum#confirm() : coc#inline#visible() ? coc#inline#accept() :"\"
@@ -28,37 +27,26 @@ inoremap <silent> <expr> <C-Space> coc#refresh()
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\"
 nnoremap  :CocCommand
 vmap  <Plug>(coc-snippets-select)
-nnoremap  h
-nnoremap <NL> j
-nnoremap  k
-nnoremap  l
+nnoremap <NL> :bp 
+nnoremap  :bn
 nnoremap <silent>  :NERDTreeToggle
-nmap  ca <Plug>NERDCommenterAltDelims
-xmap  cu <Plug>NERDCommenterUncomment
-nmap  cu <Plug>NERDCommenterUncomment
-xmap  cb <Plug>NERDCommenterAlignBoth
-nmap  cb <Plug>NERDCommenterAlignBoth
-xmap  cl <Plug>NERDCommenterAlignLeft
-nmap  cl <Plug>NERDCommenterAlignLeft
-nmap  cA <Plug>NERDCommenterAppend
-xmap  cy <Plug>NERDCommenterYank
-nmap  cy <Plug>NERDCommenterYank
-xmap  cs <Plug>NERDCommenterSexy
-nmap  cs <Plug>NERDCommenterSexy
-xmap  ci <Plug>NERDCommenterInvert
-nmap  ci <Plug>NERDCommenterInvert
-nmap  c$ <Plug>NERDCommenterToEOL
-xmap  cn <Plug>NERDCommenterNested
-nmap  cn <Plug>NERDCommenterNested
-xmap  cm <Plug>NERDCommenterMinimal
-nmap  cm <Plug>NERDCommenterMinimal
-xmap  c  <Plug>NERDCommenterToggle
-xmap  cc <Plug>NERDCommenterComment
-nmap  cc <Plug>NERDCommenterComment
+nnoremap  :bd
+tnoremap  
 nnoremap <silent>  fr :History
 nnoremap <silent>  fg :Rg
 nnoremap <silent>  ff :Files
+nnoremap  ls :LeetCodeSubmit
+nnoremap  lt :LeetCodeTest
+nnoremap  ll :LeetCodeList
 nnoremap <silent>  y :CocList -A --normal yank
+xmap , <Plug>Sneak_,
+omap , <Plug>Sneak_,
+nmap , <Plug>Sneak_,
+xmap ; <Plug>Sneak_;
+omap ; <Plug>Sneak_;
+nmap ; <Plug>Sneak_;
+map F <Plug>Sneak_F
+map S <Plug>Sneak_S
 nnoremap \n :NERDTreeFocus
 noremap <silent> \ts :CocList tasks
 nmap \aw <Plug>(coc-codeaction-selected)w
@@ -72,19 +60,25 @@ omap ac <Plug>(coc-classobj-a)
 xmap ac <Plug>(coc-classobj-a)
 omap af <Plug>(coc-funcobj-a)
 xmap af <Plug>(coc-funcobj-a)
+map f <Plug>Sneak_f
 xmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
-nmap <silent> gi <Plug>(coc-implementation)
+nmap gcu <Plug>Commentary<Plug>Commentary
+nmap gcc <Plug>CommentaryLine
+omap gc <Plug>Commentary
+nmap gc <Plug>Commentary
+xmap gc <Plug>Commentary
 nmap go :TagbarToggle
-nmap gcc <Plug>NERDCommenterToggle
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gD :tab sp<Plug>(coc-definition)
 nmap <silent> gd <Plug>(coc-definition)
+tnoremap jk 
 omap kc <Plug>(coc-classobj-i)
 xmap kc <Plug>(coc-classobj-i)
 omap kf <Plug>(coc-funcobj-i)
 xmap kf <Plug>(coc-funcobj-i)
+map s <Plug>Sneak_s
 nmap ts <Plug>(coc-translator-p)
 nmap tt :CocCommand explorer
 vnoremap <silent> <Plug>(coc-explorer-key-v-ai) :call coc#rpc#request('doKeymap', ['coc-explorer-key-v-ai'])
@@ -231,6 +225,58 @@ vnoremap <silent> <Plug>(coc-snippets-select) :call coc#rpc#notify('doKeymap',
 xnoremap <silent> <Plug>(coc-convert-snippet) :call coc#rpc#notify('doKeymap', ['coc-convert-snippet'])
 xnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
+tnoremap <silent> <C-`> :FloatermToggle
+nnoremap <silent> <C-`> :FloatermToggle
+nmap <silent> <Plug>CommentaryUndo :echoerr "Change your <Plug>CommentaryUndo map to <Plug>Commentary<Plug>Commentary"
+omap <Plug>SneakPrevious <Plug>Sneak_,
+omap <Plug>SneakNext <Plug>Sneak_;
+xmap <Plug>SneakPrevious <Plug>Sneak_,
+xmap <Plug>SneakNext <Plug>Sneak_;
+nmap <Plug>SneakPrevious <Plug>Sneak_,
+nmap <Plug>SneakNext <Plug>Sneak_;
+omap <Plug>(SneakStreakBackward) <Plug>SneakLabel_S
+omap <Plug>(SneakStreak) <Plug>SneakLabel_s
+xmap <Plug>(SneakStreakBackward) <Plug>SneakLabel_S
+xmap <Plug>(SneakStreak) <Plug>SneakLabel_s
+nmap <Plug>(SneakStreakBackward) <Plug>SneakLabel_S
+nmap <Plug>(SneakStreak) <Plug>SneakLabel_s
+xmap <Plug>VSneakPrevious <Plug>Sneak_,
+xmap <Plug>VSneakNext <Plug>Sneak_;
+xmap <Plug>VSneakBackward <Plug>Sneak_S
+xmap <Plug>VSneakForward <Plug>Sneak_s
+nmap <Plug>SneakBackward <Plug>Sneak_S
+nmap <Plug>SneakForward <Plug>Sneak_s
+onoremap <silent> <Plug>SneakLabel_S :call sneak#wrap(v:operator, 2, 1, 2, 2)
+onoremap <silent> <Plug>SneakLabel_s :call sneak#wrap(v:operator, 2, 0, 2, 2)
+xnoremap <silent> <Plug>SneakLabel_S :call sneak#wrap(visualmode(), 2, 1, 2, 2)
+xnoremap <silent> <Plug>SneakLabel_s :call sneak#wrap(visualmode(), 2, 0, 2, 2)
+nnoremap <silent> <Plug>SneakLabel_S :call sneak#wrap('', 2, 1, 2, 2)
+nnoremap <silent> <Plug>SneakLabel_s :call sneak#wrap('', 2, 0, 2, 2)
+onoremap <silent> <Plug>Sneak_T :call sneak#wrap(v:operator, 1, 1, 0, 0)
+onoremap <silent> <Plug>Sneak_t :call sneak#wrap(v:operator, 1, 0, 0, 0)
+xnoremap <silent> <Plug>Sneak_T :call sneak#wrap(visualmode(), 1, 1, 0, 0)
+xnoremap <silent> <Plug>Sneak_t :call sneak#wrap(visualmode(), 1, 0, 0, 0)
+nnoremap <silent> <Plug>Sneak_T :call sneak#wrap('', 1, 1, 0, 0)
+nnoremap <silent> <Plug>Sneak_t :call sneak#wrap('', 1, 0, 0, 0)
+onoremap <silent> <Plug>Sneak_F :call sneak#wrap(v:operator, 1, 1, 1, 0)
+onoremap <silent> <Plug>Sneak_f :call sneak#wrap(v:operator, 1, 0, 1, 0)
+xnoremap <silent> <Plug>Sneak_F :call sneak#wrap(visualmode(), 1, 1, 1, 0)
+xnoremap <silent> <Plug>Sneak_f :call sneak#wrap(visualmode(), 1, 0, 1, 0)
+nnoremap <silent> <Plug>Sneak_F :call sneak#wrap('', 1, 1, 1, 0)
+nnoremap <silent> <Plug>Sneak_f :call sneak#wrap('', 1, 0, 1, 0)
+onoremap <silent> <Plug>Sneak_, :call sneak#rpt(v:operator, 1)
+onoremap <silent> <Plug>Sneak_; :call sneak#rpt(v:operator, 0)
+xnoremap <silent> <Plug>Sneak_, :call sneak#rpt(visualmode(), 1)
+xnoremap <silent> <Plug>Sneak_; :call sneak#rpt(visualmode(), 0)
+nnoremap <silent> <Plug>Sneak_, :call sneak#rpt('', 1)
+nnoremap <silent> <Plug>Sneak_; :call sneak#rpt('', 0)
+onoremap <silent> <Plug>SneakRepeat :call sneak#wrap(v:operator, sneak#util#getc(), sneak#util#getc(), sneak#util#getc(), sneak#util#getc())
+onoremap <silent> <Plug>Sneak_S :call sneak#wrap(v:operator, 2, 1, 2, 1)
+onoremap <silent> <Plug>Sneak_s :call sneak#wrap(v:operator, 2, 0, 2, 1)
+xnoremap <silent> <Plug>Sneak_S :call sneak#wrap(visualmode(), 2, 1, 2, 1)
+xnoremap <silent> <Plug>Sneak_s :call sneak#wrap(visualmode(), 2, 0, 2, 1)
+nnoremap <silent> <Plug>Sneak_S :call sneak#wrap('', 2, 1, 2, 1)
+nnoremap <silent> <Plug>Sneak_s :call sneak#wrap('', 2, 0, 2, 1)
 onoremap <silent> <Plug>(fzf-maps-o) :call fzf#vim#maps('o', 0)
 xnoremap <silent> <Plug>(fzf-maps-x) :call fzf#vim#maps('x', 0)
 nnoremap <silent> <Plug>(fzf-maps-n) :call fzf#vim#maps('n', 0)
@@ -288,29 +334,6 @@ nnoremap <silent> <Plug>(ale_previous_error) :ALEPrevious -error
 nnoremap <silent> <Plug>(ale_previous_wrap) :ALEPreviousWrap
 nnoremap <silent> <Plug>(ale_previous) :ALEPrevious
 nnoremap <silent> <Plug>(startify-open-buffers) :call startify#open_buffers()
-nnoremap <Plug>NERDCommenterAltDelims :call nerdcommenter#SwitchToAlternativeDelimiters(1)
-xnoremap <silent> <Plug>NERDCommenterUncomment :call nerdcommenter#Comment("x", "Uncomment")
-nnoremap <silent> <Plug>NERDCommenterUncomment :call nerdcommenter#Comment("n", "Uncomment")
-xnoremap <silent> <Plug>NERDCommenterAlignBoth :call nerdcommenter#Comment("x", "AlignBoth")
-nnoremap <silent> <Plug>NERDCommenterAlignBoth :call nerdcommenter#Comment("n", "AlignBoth")
-xnoremap <silent> <Plug>NERDCommenterAlignLeft :call nerdcommenter#Comment("x", "AlignLeft")
-nnoremap <silent> <Plug>NERDCommenterAlignLeft :call nerdcommenter#Comment("n", "AlignLeft")
-nnoremap <silent> <Plug>NERDCommenterAppend :call nerdcommenter#Comment("n", "Append")
-xnoremap <silent> <Plug>NERDCommenterYank :call nerdcommenter#Comment("x", "Yank")
-nnoremap <silent> <Plug>NERDCommenterYank :call nerdcommenter#Comment("n", "Yank")
-xnoremap <silent> <Plug>NERDCommenterSexy :call nerdcommenter#Comment("x", "Sexy")
-nnoremap <silent> <Plug>NERDCommenterSexy :call nerdcommenter#Comment("n", "Sexy")
-xnoremap <silent> <Plug>NERDCommenterInvert :call nerdcommenter#Comment("x", "Invert")
-nnoremap <silent> <Plug>NERDCommenterInvert :call nerdcommenter#Comment("n", "Invert")
-nnoremap <silent> <Plug>NERDCommenterToEOL :call nerdcommenter#Comment("n", "ToEOL")
-xnoremap <silent> <Plug>NERDCommenterNested :call nerdcommenter#Comment("x", "Nested")
-nnoremap <silent> <Plug>NERDCommenterNested :call nerdcommenter#Comment("n", "Nested")
-xnoremap <silent> <Plug>NERDCommenterMinimal :call nerdcommenter#Comment("x", "Minimal")
-nnoremap <silent> <Plug>NERDCommenterMinimal :call nerdcommenter#Comment("n", "Minimal")
-xnoremap <silent> <Plug>NERDCommenterToggle :call nerdcommenter#Comment("x", "Toggle")
-nnoremap <silent> <Plug>NERDCommenterToggle :call nerdcommenter#Comment("n", "Toggle")
-xnoremap <silent> <Plug>NERDCommenterComment :call nerdcommenter#Comment("x", "Comment")
-nnoremap <silent> <Plug>NERDCommenterComment :call nerdcommenter#Comment("n", "Comment")
 nnoremap <silent> <Plug>(lsp-signature-help) :call lsp#ui#vim#signature_help#get_signature_help_under_cursor()
 nnoremap <silent> <Plug>(lsp-previous-reference) :call lsp#internal#document_highlight#jump(-1)
 nnoremap <silent> <Plug>(lsp-next-reference) :call lsp#internal#document_highlight#jump(+1)
@@ -401,14 +424,22 @@ nnoremap <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',   
 vnoremap <silent> <Plug>(coc-range-select-backward) :call       CocActionAsync('rangeSelect',     visualmode(), v:false)
 vnoremap <silent> <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',     visualmode(), v:true)
 nnoremap <F5> :ALEToggle
-nnoremap <C-L> l
-nnoremap <C-K> k
-nnoremap <C-J> j
-nnoremap <C-H> h
+nnoremap <Right> :vertical res -5
+nnoremap <Left> :vertical res +5
+nnoremap <Down> :res -5
+nnoremap <Up> :res +5
+nnoremap <C-Right> l
+nnoremap <C-Up> k
+nnoremap <C-Down> j
+nnoremap <C-Left> h
+tnoremap <C-Right> l
+tnoremap <C-Up> k
+tnoremap <C-Down> j
+tnoremap <C-Left> h
 nnoremap <silent> <C-N> :NERDTreeToggle
-nnoremap <M-q> :bd
-nnoremap <M-k> :bn
-nnoremap <M-j> :bp 
+nnoremap <C-Q> :bd
+nnoremap <C-K> :bn
+nnoremap <C-J> :bp 
 vmap <C-E> <Plug>(coc-snippets-select)
 nnoremap <C-C> :CocCommand
 imap  <Plug>(coc-snippets-expand-jump)
@@ -419,9 +450,6 @@ inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#next(1) : coc#inline#vis
 inoremap <silent> <expr>  coc#refresh()
 inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#prev(1) : coc#inline#visible() ? coc#inline#prev() : "\"
 inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm() : coc#inline#visible() ? coc#inline#accept() :"\"
-nnoremap ñ :bd
-nnoremap ë :bn
-nnoremap ê :bp 
 inoremap jk 
 let &cpo=s:cpo_save
 unlet s:cpo_save
@@ -435,7 +463,7 @@ set laststatus=2
 set nomodeline
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/nerdcommenter,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,~/.vim/plugged/vim-startify,~/.vim/plugged/ale,~/.vim/plugged/vim-solarized8,~/.vim/plugged/fzf,~/.vim/plugged/fzf.vim,~/.vim/plugged/vim-one,~/.vim/plugged/vimtex,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim91,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/plugged/vimtex/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
+set runtimepath=~/.vim,~/.vim/plugged/gruvbox,~/.vim/plugged/tokyonight-vim,~/.vim/plugged/nerdtree,~/.vim/plugged/vim-airline,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,~/.vim/plugged/vim-lsp,~/.vim/plugged/rainbow,~/.vim/plugged/auto-pairs,~/.vim/plugged/indentLine,~/.vim/plugged/tagbar,~/.vim/plugged/rust.vim,~/.vim/plugged/vim-racer,~/.vim/plugged/syntastic,~/.vim/plugged/bracey.vim,~/.vim/plugged/autosuggest.vim,~/.vim/plugged/vim-startify,~/.vim/plugged/ale,~/.vim/plugged/vim-solarized8,~/.vim/plugged/fzf,~/.vim/plugged/fzf.vim,~/.vim/plugged/vim-one,~/.vim/plugged/vimtex,~/.vim/plugged/vim-sneak,~/.vim/plugged/vim-commentary,~/.vim/plugged/vim-floaterm,~/.vim/plugged/leetcode.vim,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim91,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/rust.vim/after,~/.vim/plugged/vimtex/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-snippets,~/.config/coc/extensions/node_modules/coc-explorer
 set shortmess=filnxtToOSI
 set showtabline=2
 set splitbelow
@@ -447,7 +475,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.vim
+cd ~/.vim/config
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -456,12 +484,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 ~/,.
 argglobal
 %argdel
-$argadd ~/,.
-edit ~/,.
 argglobal
+enew
 let s:cpo_save=&cpo
 set cpo&vim
 inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
@@ -478,6 +504,25 @@ inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
 inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
 inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
 inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
+nnoremap <buffer> <nowait> <silent>  :call startify#open_buffers()
+nnoremap <buffer> <nowait> <silent> 0 :call startify#open_buffers(19)
+nnoremap <buffer> <nowait> <silent> 16 :call startify#open_buffers(38)
+nnoremap <buffer> <nowait> <silent> 15 :call startify#open_buffers(37)
+nnoremap <buffer> <nowait> <silent> 14 :call startify#open_buffers(36)
+nnoremap <buffer> <nowait> <silent> 13 :call startify#open_buffers(35)
+nnoremap <buffer> <nowait> <silent> 12 :call startify#open_buffers(34)
+nnoremap <buffer> <nowait> <silent> 11 :call startify#open_buffers(33)
+nnoremap <buffer> <nowait> <silent> 10 :call startify#open_buffers(32)
+nnoremap <buffer> <nowait> <silent> 1 :call startify#open_buffers(20)
+nnoremap <buffer> <nowait> <silent> 2 :call startify#open_buffers(21)
+nnoremap <buffer> <nowait> <silent> 3 :call startify#open_buffers(22)
+nnoremap <buffer> <nowait> <silent> 4 :call startify#open_buffers(23)
+nnoremap <buffer> <nowait> <silent> 5 :call startify#open_buffers(24)
+nnoremap <buffer> <nowait> <silent> 6 :call startify#open_buffers(25)
+nnoremap <buffer> <nowait> <silent> 7 :call startify#open_buffers(26)
+nnoremap <buffer> <nowait> <silent> 8 :call startify#open_buffers(27)
+nnoremap <buffer> <nowait> <silent> 9 :call startify#open_buffers(28)
+nnoremap <buffer> <nowait> <silent> B :call startify#set_batchmode('B')
 inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
 inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
 inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
@@ -490,6 +535,21 @@ inoremap <buffer> <silent> ý =AutoPairsMoveCharacter('}')
 inoremap <buffer> <silent> û =AutoPairsMoveCharacter('{')
 inoremap <buffer> <silent> Ý =AutoPairsMoveCharacter(']')
 inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
+nnoremap <buffer> <expr> N 'j '[v:searchforward].'N'
+nnoremap <buffer> <nowait> <silent> S :call startify#set_batchmode('S')
+nnoremap <buffer> <nowait> <silent> T :call startify#set_batchmode('T')
+nnoremap <buffer> <nowait> <silent> V :call startify#set_batchmode('V')
+nnoremap <buffer> <nowait> <silent> b :call startify#set_mark('B')
+nnoremap <buffer> <nowait> <silent> e :call startify#open_buffers(15)
+nnoremap <buffer> <nowait> <silent> i :enew | startinsert
+nnoremap <buffer> <expr> n ' j'[v:searchforward].'n'
+nnoremap <buffer> <nowait> <silent> q :call startify#open_buffers(40)
+nnoremap <buffer> <nowait> <silent> s :call startify#set_mark('S')
+nnoremap <buffer> <nowait> <silent> t :call startify#set_mark('T')
+nnoremap <buffer> <nowait> <silent> v :call startify#set_mark('V')
+nnoremap <buffer> <nowait> <silent> <MiddleMouse> :enew | execute 'normal! "'.(v:register=='"'?'*':v:register).'gp'
+nnoremap <buffer> <nowait> <silent> <2-LeftMouse> :call startify#open_buffers()
+nnoremap <buffer> <nowait> <silent> <Insert> :enew | startinsert
 noremap <buffer> <silent> <M-n> :call AutoPairsJump()
 noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
 inoremap <buffer> <silent>  =AutoPairsDelete()
@@ -515,8 +575,8 @@ setlocal balloonexpr=
 setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
+setlocal bufhidden=wipe
+setlocal nobuflisted
 setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
@@ -528,8 +588,8 @@ setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal completefunc=
-setlocal concealcursor=inc
-setlocal conceallevel=2
+setlocal concealcursor=
+setlocal conceallevel=0
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
@@ -542,8 +602,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != ''
-setlocal filetype=
+if &filetype != 'startify'
+setlocal filetype=startify
 endif
 setlocal fillchars=
 setlocal fixendofline
@@ -579,12 +639,12 @@ setlocal nolist
 setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
+setlocal matchpairs=
 setlocal nomodeline
-setlocal modifiable
+setlocal nomodifiable
 setlocal nrformats=bin,octal,hex
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -601,7 +661,7 @@ setlocal shiftwidth=8
 setlocal noshortname
 setlocal showbreak=
 setlocal sidescrolloff=-1
-setlocal signcolumn=auto
+setlocal signcolumn=no
 setlocal nosmartindent
 setlocal nosmoothscroll
 setlocal softtabstop=0
@@ -612,10 +672,10 @@ setlocal spelllang=en
 setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
-setlocal swapfile
+setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
+if &syntax != 'startify'
+setlocal syntax=startify
 endif
 setlocal tabstop=8
 setlocal tagcase=
@@ -637,14 +697,6 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 23) / 46)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 1
-normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
