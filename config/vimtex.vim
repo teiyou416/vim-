@@ -10,8 +10,9 @@ syntax enable
 
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
-let g:vimtex_view_method = 'zathura'
-
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_skim_sync = 1
+let g:vimtex_view_skim_activate = 1
 " Or with a generic interface:
 
 " VimTeX uses latexmk as the default compiler backend. If you use it, which is
@@ -24,3 +25,4 @@ let g:vimtex_view_method = 'zathura'
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
 let maplocalleader = ","
+
