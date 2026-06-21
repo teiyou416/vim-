@@ -6,8 +6,11 @@
     "checkOnSave.command": "clippy",
     "completion.autoimport.enable": true
   },
+  "suggest.wordSource": "none",
   "snippets.ultisnips.pythonPrompt": false,
+  "snippets.userSnippetsDirectory": "",
+  "snippets.textmatch": false,
   "markdown.extension.conceal.enabled":false,
-  "go.goplsPath": "/home/teiyou/go/bin/gopls",
+  "go.goplsPath": "/Users/teiyou/go/bin/gopls",
 }
 

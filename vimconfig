@@ -24,7 +24,11 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'rakr/vim-one'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'lervag/vimtex', { 'tag': 'v2.15' }
+Plug 'jalvesaq/Vim-R'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 "config files
 source ~/.vim/config/coc.vim
@@ -50,9 +54,9 @@ nnoremap <C-Right> <C-w>l
 "nmap <silent> gi <Plug>(coc-implementation)
 "nmap <silent> gr <Plug>(coc-references)
 "base config
-set clipboard=unnamed
+"set clipboard=unnamed
 set number
-set clipboard=unnamedplus
+set clipboard=unnamedplus,unnamed
 set hlsearch
 set incsearch
 "the color config 
@@ -60,18 +64,28 @@ set incsearch
 "let g:tokyonight_style = 'storm' " available: night, storm
 "let g:tokyonight_enable_italic = 1
 "colorscheme tokyonight
-colorscheme gruvbox
+"colorscheme gruvbox
+"let g:gruvbox_contrast_dark='hard'
 "colorscheme solarized8_high
 "colorscheme blue
-"colorscheme  onedark_vivid
-"colorscheme one
+"colorscheme  onedark_vivi
+"colorscheme solarized
+"d"colorscheme one
+autocmd FileType * setlocal formatoptions-=r
 set background=dark
 set splitbelow
 "the colorscheme for airline
-let g:airline_theme='one'
+"let g:airline_theme='one'
 let mapleader = ' '
 let g:ale_linters_explicit=1
-let g:coc_start_at_startup=0
+let g:coc_start_at_startup=1
+"let g:tex_conceal = ""
+"let g:vimtex_syntax_conceal = {'elements': []}
+let g:vimtex_syntax_conceal_disable=1
+syntax on
+let g:tex_conceal = ""
+set conceallevel=0
+
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fg :Rg<CR>
 nnoremap <silent> <leader>fr :History<CR>
