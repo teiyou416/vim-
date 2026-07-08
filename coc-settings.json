@@ -12,5 +12,13 @@
   "snippets.textmatch": false,
   "markdown.extension.conceal.enabled":false,
   "go.goplsPath": "/Users/teiyou/go/bin/gopls",
+  "go.goplsOptions": {
+    "staticcheck": true,     
+    "completeUnimported": true 
+  },
+  "coc.preferences.formatOnSaveFiletypes": ["go"],
+  "compatibility": {
+    "go": "gopls"
+  }
 }
 

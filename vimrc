@@ -29,6 +29,8 @@ Plug 'lervag/vimtex', { 'tag': 'v2.15' }
 Plug 'jalvesaq/Vim-R'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'altercation/vim-colors-solarized'
+Plug 'teiyou416/hackmd.vim'
+"Plug '/Users/teiyou/dev/hackmd-vim'
 call plug#end()
 "config files
 source ~/.vim/config/coc.vim
@@ -38,9 +40,11 @@ source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/leetcode.vim
 source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/tagbar.vim
+source ~/.vim/config/indentline.vim
 source ~/.vim/config/rust.vim
 source ~/.vim/config/syn.vim
 source ~/.vim/config/vimtex.vim
+source ~/.vim/config/vcp.vim
 "the keybinds
 "most important
 inoremap jk <Esc>
@@ -85,6 +89,9 @@ let g:vimtex_syntax_conceal_disable=1
 syntax on
 let g:tex_conceal = ""
 set conceallevel=0
+
+" 針對 Markdown 檔案關閉自動隱藏符號功能
+autocmd FileType markdown setlocal conceallevel=0
 
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fg :Rg<CR>
