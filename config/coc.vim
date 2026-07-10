@@ -1,3 +1,9 @@
+" Fix coc popup/floating window contrast on light terminal background
+hi Pmenu ctermbg=White ctermfg=Black guibg=#ffffff guifg=#000000
+hi PmenuSel ctermbg=LightBlue ctermfg=Black guibg=#a8d1ff guifg=#000000
+hi CocFloating ctermbg=White ctermfg=Black guibg=#ffffff guifg=#000000
+hi CocMenuSel ctermbg=LightBlue ctermfg=Black guibg=#a8d1ff guifg=#000000
+
 let g:coc_global_extensions = [
 	\ 'coc-css',
 	\ 'coc-diagnostic',
@@ -72,16 +78,16 @@ omap kc <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 " Useful commands
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
-nmap tt :CocCommand explorer<CR>
+nmap <leader>e :CocCommand explorer<CR>
 " coc-translator
-nmap ts <Plug>(coc-translator-p)
+nmap <leader>tr <Plug>(coc-translator-p)
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
