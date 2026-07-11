@@ -23,6 +23,9 @@ Plug 'teiyou416/hackmd.vim'
 Plug 'puremourning/vimspector'
 "Plug '/Users/teiyou/dev/hackmd-vim'
 call plug#end()
+
+let mapleader = ' '
+
 "config files
 source ~/.vim/config/coc.vim
 source ~/.vim/config/airline.vim
@@ -36,6 +39,7 @@ source ~/.vim/config/syn.vim
 source ~/.vim/config/vimtex.vim
 source ~/.vim/config/vcp.vim
 source ~/.vim/config/vimspector.vim
+source ~/.vim/config/leetcode.vim
 "the keybinds
 "most important
 inoremap jk <Esc>
@@ -59,7 +63,6 @@ set background=light
 set splitbelow
 "the colorscheme for airline
 "let g:airline_theme='one'
-let mapleader = ' '
 let g:ale_linters_explicit=1
 let g:coc_start_at_startup=1
 "let g:tex_conceal = ""
