@@ -39,7 +39,6 @@ source ~/.vim/config/syn.vim
 source ~/.vim/config/vimtex.vim
 source ~/.vim/config/vcp.vim
 source ~/.vim/config/vimspector.vim
-source ~/.vim/config/leetcode.vim
 "the keybinds
 "most important
 inoremap jk <Esc>
@@ -61,16 +60,19 @@ set incsearch
 autocmd FileType * setlocal formatoptions-=r
 set background=light
 set splitbelow
+
 "the colorscheme for airline
-"let g:airline_theme='one'
 let g:ale_linters_explicit=1
-let g:coc_start_at_startup=1
+let g:airline_theme= 'papercolor'
+let g:airline_skip_empty_sections = 1
+
 "let g:tex_conceal = ""
 "let g:vimtex_syntax_conceal = {'elements': []}
 let g:vimtex_syntax_conceal_disable=1
 syntax on
 let g:tex_conceal = ""
 set conceallevel=0
+let g:coc_start_at_startup=1
 
 " 針對 Markdown 檔案關閉自動隱藏符號功能
 autocmd FileType markdown setlocal conceallevel=0
