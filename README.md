@@ -47,7 +47,8 @@ plugged/           " vim-plug 安装插件的实际目录（已 gitignore，不�
 - `let mapleader = ' '`：Leader 键设为 **空格**
 - `let maplocalleader = ','`（vimtex.vim 里设置）：Local Leader 为 `,`
 - `let g:ale_linters_explicit=1`：ALE 只用明确配置的 linter
-- `let g:coc_start_at_startup=1` 但 `let g:coc_enabled=0`（在 coc.vim 里设置）：coc 不会随 Vim 启动自动激活，需要手动 `:CocStart` 或用 `<C-c>` 调 `CocCommand`
+- `let g:coc_start_at_startup=1`：coc 随 Vim 启动自动激活
+- Go 补全由 `coc-go` 和 `gopls` 提供；`completionBudget` 设为 `500ms`，让复杂项目有更多时间生成深层及未导入候选
 
 ## 快捷键一览
 
@@ -89,7 +90,7 @@ plugged/           " vim-plug 安装插件的实际目录（已 gitignore，不�
 | `˚` (Option+k) | `:bn` 下一个 buffer |
 | `œ` (Option+q) | `:bd` 关闭 buffer |
 
-### coc.nvim（需要先手动启用 coc）
+### coc.nvim
 
 | 按键 | 模式 | 作用 |
 |---|---|---|

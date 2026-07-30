@@ -26,7 +26,7 @@ call plug#end()
 
 let mapleader = ' '
 
-"set timeoutlen=300
+set timeoutlen=250
 
 
 "config files
@@ -44,7 +44,7 @@ source ~/.vim/config/vcp.vim
 source ~/.vim/config/vimspector.vim
 "the keybinds
 "most important
-"inoremap jk <Esc>
+inoremap jk <Esc>
 nnoremap <C-Left> <C-w>h
 nnoremap <C-Down> <C-w>j
 nnoremap <C-Up> <C-w>k

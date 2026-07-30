@@ -6,19 +6,14 @@
     "checkOnSave.command": "clippy",
     "completion.autoimport.enable": true
   },
-  "suggest.wordSource": "none",
   "snippets.ultisnips.pythonPrompt": false,
   "snippets.userSnippetsDirectory": "",
   "snippets.textmatch": false,
-  "markdown.extension.conceal.enabled":false,
+  "markdown.extension.conceal.enabled": false,
   "go.goplsPath": "/Users/teiyou/go/bin/gopls",
   "go.goplsOptions": {
-    "staticcheck": true,     
-    "completeUnimported": true 
+    "staticcheck": true,
+    "completionBudget": "500ms"
   },
-  "coc.preferences.formatOnSaveFiletypes": ["go"],
-  "compatibility": {
-    "go": "gopls"
-  }
+  "coc.preferences.formatOnSaveFiletypes": ["go"]
 }
-
